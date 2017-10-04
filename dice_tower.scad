@@ -1,7 +1,6 @@
 include <axes.scad>;
 use <face.scad>;
-
-function select(vector,indices) = [ for (index = indices) vector[index] ];
+use <list.scad>;
 
 PHI = (1 + sqrt(5)) / 2;
 
