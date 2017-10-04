@@ -20,26 +20,55 @@ module tray(tray_height, tray_width, tray_depth, wood_thickness) {
 
     // bottom
     color("blue") {
-        face(select(tray_points, [0, 1, 2, 3]), wood_thickness * Z);
+        face(edge_concat([
+            select(tray_points, [0, 1]),
+            select(tray_points, [1, 2]),
+            select(tray_points, [2, 3]),
+            select(tray_points, [3, 0])
+        ]), wood_thickness * Z);
     }
 
     // front
     color("green") {
-        face(select(tray_points, [1, 0, 4, 5]), wood_thickness * Y);
+        face(edge_concat([
+            select(tray_points, [1, 0]),
+            select(tray_points, [0, 4]),
+            select(tray_points, [4, 5]),
+            select(tray_points, [5, 1])
+        ]), wood_thickness * Y);
     }
 
     // right
     color("red") {
-        face(select(tray_points, [2, 1, 5, 6, 7, 8]), wood_thickness * -X);
+        face(edge_concat([
+            select(tray_points, [2, 1]),
+            select(tray_points, [1, 5]),
+            select(tray_points, [5, 6]),
+            select(tray_points, [6, 7]),
+            select(tray_points, [7, 8]),
+            select(tray_points, [8, 2])
+        ]), wood_thickness * -X);
     }
 
     // back
     color("green") {
-        face(select(tray_points, [3, 2, 8, 9]), wood_thickness * -Y);
+        face(edge_concat([
+            select(tray_points, [3, 2]),
+            select(tray_points, [2, 8]),
+            select(tray_points, [8, 9]),
+            select(tray_points, [9, 3])
+        ]), wood_thickness * -Y);
     }
 
     // left
     color("red") {
-        face(select(tray_points, [0, 3, 9, 10, 11, 4]), wood_thickness * X);
+        face(edge_concat([
+            select(tray_points, [0, 3]),
+            select(tray_points, [3, 9]),
+            select(tray_points, [9, 10]),
+            select(tray_points, [10, 11]),
+            select(tray_points, [11, 4]),
+            select(tray_points, [4, 0])
+        ]), wood_thickness * X);
     }
 }
