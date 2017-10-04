@@ -1,6 +1,4 @@
-X = [1, 0, 0];
-Y = [0, 1, 0];
-Z = [0, 0, 1];
+include <axes.scad>;
 
 function cat(L1, L2) = [for (i=[0:len(L1)+len(L2)-1]) 
                         i < len(L1)? L1[i] : L2[i-len(L1)]] ;
