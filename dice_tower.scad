@@ -1,8 +1,5 @@
 include <axes.scad>;
 
-function cat(L1, L2) = [for (i=[0:len(L1)+len(L2)-1]) 
-                        i < len(L1)? L1[i] : L2[i-len(L1)]] ;
-
 function select(vector,indices) = [ for (index = indices) vector[index] ];
 
 function extrude(points, amount) = [
@@ -10,7 +7,7 @@ function extrude(points, amount) = [
 ];
 
 function convolve(n) =
-    cat([
+    concat([
             [for(i=[0:1:n-1])i],
             [for(i=[n-1:-1:0])i+n]
         ],
@@ -21,7 +18,7 @@ function convolve(n) =
 
 module face(points, vector) {
     polyhedron(
-        cat(points, extrude(points, vector)),
+        concat(points, extrude(points, vector)),
         convolve(len(points))
     );
 }
