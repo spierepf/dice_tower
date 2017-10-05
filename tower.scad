@@ -3,6 +3,28 @@ use <face.scad>;
 use <list.scad>;
 use <finger_joint.scad>;
 
+module bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness) {
+    bottom_chicane_depth = tower_depth - (8.0 / 5.0) * wood_thickness;
+    bottom_chicane_height = wood_thickness + (3.0 / 4.0) * bottom_chicane_depth;
+    bottom_chicane_normal = unit([0, -bottom_chicane_height, bottom_chicane_depth]);
+
+    bottom_chicane_points = [
+        [0,           0,                    0],                     // 0 front left
+        [tower_width, 0,                    0],                     // 1 front right
+        [tower_width, bottom_chicane_depth, bottom_chicane_height], // 2 back right
+        [0,           bottom_chicane_depth, bottom_chicane_height], // 3 back left
+    ];
+
+    translate([0, 0, (9.0/5.0)*wood_thickness]) {
+        face(edge_concat([
+            finger_joint_ends_in(select(bottom_chicane_points, [0, 3]), -bottom_chicane_normal, wood_thickness),
+            shorten_tail_end(select(bottom_chicane_points, [3, 2]), -bottom_chicane_normal, wood_thickness),
+            finger_joint_ends_in(select(bottom_chicane_points, [2, 1]), -bottom_chicane_normal, wood_thickness),
+            shorten_both_ends(select(bottom_chicane_points, [1, 0]), -bottom_chicane_normal, wood_thickness)
+        ]), wood_thickness * -bottom_chicane_normal);
+    }
+}
+
 module tower(tower_height, tower_width, tower_depth, wood_thickness) {
     tower_points = [
         [0,             0,                                          0],                 // 0  bottom front left
@@ -67,5 +89,9 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
             finger_joint_ends_in(select(tower_points, [6, 4]), X, wood_thickness, 7),
             shorten_tail_end(select(tower_points, [4, 0]), X, wood_thickness)
         ]), wood_thickness * X);
+    }
+
+    color("yellow") {
+        bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness);
     }
 }
