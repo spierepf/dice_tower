@@ -15,6 +15,6 @@ tower_depth  = tray_height - 1.0 * wood_thickness;
 
 tray(tray_height, tray_width, tray_depth, wood_thickness);
 
-translate([wood_thickness, tray_depth - tower_depth - 2 * wood_thickness, wood_thickness]){
+translate([wood_thickness, tray_depth - tower_depth - wood_thickness, wood_thickness]){
     tower(tower_height, tower_width, tower_depth, wood_thickness);
 }
