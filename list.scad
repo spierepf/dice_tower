@@ -9,3 +9,5 @@ function edge_concat(l) = [
         let(j = (i + len(l)-1) % len(l))
             for (b = last(l[j]) == head(l[i]) ? tail(l[i]) : l[i]) b
 ];
+
+function sum(v) = len(v) == 0 ? 0 : v[0] + sum(tail(v));

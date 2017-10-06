@@ -1,7 +1,5 @@
 use <list.scad>
 
-function sum(v) = len(v) == 0 ? 0 : v[0] + sum(tail(v));
-
 function distance(p1, p2) = sqrt(sum([for(w=p2-p1)w*w]));
 function unit(v) = v / distance([0, 0, 0], v);
 function forward(p1, p2) = unit(p2-p1);
