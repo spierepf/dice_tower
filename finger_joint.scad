@@ -5,6 +5,12 @@ function unit(v) = v / distance([0, 0, 0], v);
 function forward(p1, p2) = unit(p2-p1);
 function inward(p1, p2, upward) = cross(upward, forward(p1, p2));
 
+function edge_concat(l) = [
+    for (i = [0 : 1 : len(l)-1])
+        let(j = (i + len(l)-1) % len(l))
+            for (b = last(l[j]) == head(l[i]) ? tail(l[i]) : l[i]) b
+];
+
 function finger_joint_ends_in(ends, upward, wood_thickness, count = 3) = 
     let(
         p1 = ends[0],
