@@ -8,7 +8,7 @@ function inward(p1, p2, upward) = cross(upward, forward(p1, p2));
 function edge_concat(l) = [
     for (i = [0 : 1 : len(l)-1])
         let(j = (i + len(l)-1) % len(l))
-            for (b = last(l[j]) == head(l[i]) ? tail(l[i]) : l[i]) b
+            for (b = (distance(last(l[j]), head(l[i])) < 0.00001) ? tail(l[i]) : l[i]) b
 ];
 
 function finger_joint_ends_in(ends, upward, wood_thickness, count = 3) = 
