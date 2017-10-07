@@ -15,14 +15,12 @@ module bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness) {
         [0,           bottom_chicane_depth, bottom_chicane_height], // 3 back left
     ];
 
-    translate([0, 0, (9.0/5.0)*wood_thickness]) {
-        face(edge_concat([
-            finger_joint_ends_in(select(bottom_chicane_points, [0, 3]), -bottom_chicane_normal, wood_thickness),
-            shorten_both_ends(select(bottom_chicane_points, [3, 2]), -bottom_chicane_normal, wood_thickness),
-            finger_joint_ends_in(select(bottom_chicane_points, [2, 1]), -bottom_chicane_normal, wood_thickness),
-            shorten_both_ends(select(bottom_chicane_points, [1, 0]), -bottom_chicane_normal, wood_thickness)
-        ]), wood_thickness * -bottom_chicane_normal);
-    }
+    face(edge_concat([
+        finger_joint_ends_in(select(bottom_chicane_points, [0, 3]), -bottom_chicane_normal, wood_thickness),
+        shorten_both_ends(select(bottom_chicane_points, [3, 2]), -bottom_chicane_normal, wood_thickness),
+        finger_joint_ends_in(select(bottom_chicane_points, [2, 1]), -bottom_chicane_normal, wood_thickness),
+        shorten_both_ends(select(bottom_chicane_points, [1, 0]), -bottom_chicane_normal, wood_thickness)
+    ]), wood_thickness * -bottom_chicane_normal);
 }
 
 module tower(tower_height, tower_width, tower_depth, wood_thickness) {
@@ -92,6 +90,8 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
     }
 
     color("yellow") {
-        bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness);
+        translate([0, 0, (9.0/5.0)*wood_thickness]) {
+            bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness);
+        }
     }
 }
