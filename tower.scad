@@ -61,13 +61,19 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
 
     // right
     color("red") {
-        face(edge_concat([
-            finger_joint_ends_in(select(tower_points, [2, 1]), -X, wood_thickness, 5),
-            shorten_lead_end(select(tower_points, [1, 5]), -X, wood_thickness),
-            finger_joint_ends_in(select(tower_points, [5, 7]), -X, wood_thickness, 7),
-            shorten_lead_end(select(tower_points, [7, 8]), -X, wood_thickness),
-            finger_joint_ends_out(shorten_tail_end(select(tower_points, [8, 2]), -X, wood_thickness), -X, wood_thickness, 11)
-        ]), wood_thickness * -X);
+        difference() {
+            face(edge_concat([
+                finger_joint_ends_in(select(tower_points, [2, 1]), -X, wood_thickness, 5),
+                shorten_lead_end(select(tower_points, [1, 5]), -X, wood_thickness),
+                finger_joint_ends_in(select(tower_points, [5, 7]), -X, wood_thickness, 7),
+                shorten_lead_end(select(tower_points, [7, 8]), -X, wood_thickness),
+                finger_joint_ends_out(shorten_tail_end(select(tower_points, [8, 2]), -X, wood_thickness), -X, wood_thickness, 11)
+            ]), wood_thickness * -X);
+
+            translate([-0.0005, 0, 0]) {
+                chicanes(tower_height, tower_width+0.001, tower_depth, wood_thickness+0.0005);
+            }
+        }
     }
 
     // back
@@ -82,13 +88,19 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
 
     // left
     color("red") {
-        face(edge_concat([
-            finger_joint_ends_in(select(tower_points, [0, 3]), X, wood_thickness, 5),
-            finger_joint_ends_out(shorten_lead_end(select(tower_points, [3, 9]), X, wood_thickness), X, wood_thickness, 11),
-            shorten_tail_end(select(tower_points, [9, 6]), X, wood_thickness),
-            finger_joint_ends_in(select(tower_points, [6, 4]), X, wood_thickness, 7),
-            shorten_tail_end(select(tower_points, [4, 0]), X, wood_thickness)
-        ]), wood_thickness * X);
+        difference() {
+            face(edge_concat([
+                finger_joint_ends_in(select(tower_points, [0, 3]), X, wood_thickness, 5),
+                finger_joint_ends_out(shorten_lead_end(select(tower_points, [3, 9]), X, wood_thickness), X, wood_thickness, 11),
+                shorten_tail_end(select(tower_points, [9, 6]), X, wood_thickness),
+                finger_joint_ends_in(select(tower_points, [6, 4]), X, wood_thickness, 7),
+                shorten_tail_end(select(tower_points, [4, 0]), X, wood_thickness)
+            ]), wood_thickness * X);
+
+            translate([-0.0005, 0, 0]) {
+                chicanes(tower_height, tower_width+0.001, tower_depth, wood_thickness+0.0005);
+            }
+        }
     }
 
     color("yellow") {
