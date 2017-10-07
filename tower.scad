@@ -27,16 +27,16 @@ module chicanes(tower_height, tower_width, tower_depth, wood_thickness) {
 }
 module tower(tower_height, tower_width, tower_depth, wood_thickness) {
     tower_points = [
-        [0,             0,                                          0],                 // 0  bottom front left
-        [tower_width,   0,                                          0],                 // 1  bottom front right
-        [tower_width,   tower_depth,                                0],                 // 2  bottom back right
-        [0,             tower_depth,                                0],                 // 3  bottom back left
-        [0,             0,                                          tower_depth],       // 4  middle front left
-        [tower_width,   0,                                          tower_depth],       // 5  middle front right
-        [0,             0,                                          tower_height],      // 6  top front left
-        [tower_width,   0,                                          tower_height],      // 7  top front right
-        [tower_width,   tower_depth,                                tower_height],      // 8  top back right
-        [0,             tower_depth,                                tower_height],      // 9  top back left
+        [0,             0,              0],                 // 0  bottom front left
+        [tower_width,   0,              0],                 // 1  bottom front right
+        [tower_width,   tower_depth,    0],                 // 2  bottom back right
+        [0,             tower_depth,    0],                 // 3  bottom back left
+        [0,             0,              tower_depth],       // 4  middle front left
+        [tower_width,   0,              tower_depth],       // 5  middle front right
+        [0,             0,              tower_height],      // 6  top front left
+        [tower_width,   0,              tower_height],      // 7  top front right
+        [tower_width,   tower_depth,    tower_height],      // 8  top back right
+        [0,             tower_depth,    tower_height],      // 9  top back left
     ];
 
     // bottom
