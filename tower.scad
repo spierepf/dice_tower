@@ -4,23 +4,24 @@ use <list.scad>;
 use <finger_joint.scad>;
 
 module bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness) {
-    bottom_chicane_depth = tower_depth - (8.0 / 5.0) * wood_thickness;
-    bottom_chicane_height = wood_thickness + (3.0 / 4.0) * bottom_chicane_depth;
-    bottom_chicane_normal = unit([0, -3.0, 4.0]);
+    width = tower_width;
+    depth = tower_depth - (8.0 / 5.0) * wood_thickness;
+    height = wood_thickness + (3.0 / 4.0) * depth;
+    normal = unit([0, -3.0, 4.0]);
 
-    bottom_chicane_points = [
-        [0,           0,                    0],                     // 0 front left
-        [tower_width, 0,                    0],                     // 1 front right
-        [tower_width, bottom_chicane_depth, bottom_chicane_height], // 2 back right
-        [0,           bottom_chicane_depth, bottom_chicane_height], // 3 back left
+    points = [
+        [0,     0,      0],         // 0 front left
+        [width, 0,      0],         // 1 front right
+        [width, depth,  height],    // 2 back right
+        [0,     depth,  height],    // 3 back left
     ];
 
     face(edge_concat([
-        finger_joint_ends_in(select(bottom_chicane_points, [0, 3]), -bottom_chicane_normal, wood_thickness),
-        shorten_both_ends(select(bottom_chicane_points, [3, 2]), -bottom_chicane_normal, wood_thickness),
-        finger_joint_ends_in(select(bottom_chicane_points, [2, 1]), -bottom_chicane_normal, wood_thickness),
-        shorten_both_ends(select(bottom_chicane_points, [1, 0]), -bottom_chicane_normal, wood_thickness)
-    ]), wood_thickness * -bottom_chicane_normal);
+        finger_joint_ends_in(select(points, [0, 3]), -normal, wood_thickness),
+        shorten_both_ends(select(points, [3, 2]), -normal, wood_thickness),
+        finger_joint_ends_in(select(points, [2, 1]), -normal, wood_thickness),
+        shorten_both_ends(select(points, [1, 0]), -normal, wood_thickness)
+    ]), wood_thickness * -normal);
 }
 
 module tower(tower_height, tower_width, tower_depth, wood_thickness) {
