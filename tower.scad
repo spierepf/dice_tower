@@ -6,7 +6,7 @@ use <finger_joint.scad>;
 module bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness) {
     bottom_chicane_depth = tower_depth - (8.0 / 5.0) * wood_thickness;
     bottom_chicane_height = wood_thickness + (3.0 / 4.0) * bottom_chicane_depth;
-    bottom_chicane_normal = unit([0, -bottom_chicane_height, bottom_chicane_depth]);
+    bottom_chicane_normal = unit([0, -3.0, 4.0]);
 
     bottom_chicane_points = [
         [0,           0,                    0],                     // 0 front left
