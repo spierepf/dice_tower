@@ -3,23 +3,20 @@ use <face.scad>;
 use <list.scad>;
 use <finger_joint.scad>;
 
-module bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness) {
-    width = tower_width;
-    depth = tower_depth - (8.0 / 5.0) * wood_thickness;
-    height = wood_thickness + (3.0 / 4.0) * depth;
-    normal = unit([0, -3.0, 4.0]);
+module chicane(height, width, depth, wood_thickness, front_facing, finger_count) {
+    normal = unit([0, front_facing ? -height : height, depth]);
 
     points = [
-        [0,     0,      0],         // 0 front left
-        [width, 0,      0],         // 1 front right
-        [width, depth,  height],    // 2 back right
-        [0,     depth,  height],    // 3 back left
+        [0,     0,      front_facing ? 0 : height],    // 0 front left
+        [width, 0,      front_facing ? 0 : height],    // 1 front right
+        [width, depth,  front_facing ? height : 0],    // 2 back right
+        [0,     depth,  front_facing ? height : 0]     // 3 back left
     ];
 
     face(edge_concat([
-        finger_joint_ends_in(select(points, [0, 3]), -normal, wood_thickness),
+        finger_joint_ends_in(select(points, [0, 3]), -normal, wood_thickness, finger_count),
         shorten_both_ends(select(points, [3, 2]), -normal, wood_thickness),
-        finger_joint_ends_in(select(points, [2, 1]), -normal, wood_thickness),
+        finger_joint_ends_in(select(points, [2, 1]), -normal, wood_thickness, finger_count),
         shorten_both_ends(select(points, [1, 0]), -normal, wood_thickness)
     ]), wood_thickness * -normal);
 }
@@ -92,7 +89,25 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
 
     color("yellow") {
         translate([0, 0, (9.0/5.0)*wood_thickness]) {
-            bottom_chicane(tower_height, tower_width, tower_depth, wood_thickness);
+            chicane(
+                wood_thickness + (3.0 / 4.0) * (tower_depth - (8.0 / 5.0) * wood_thickness),
+                tower_width,
+                tower_depth - (8.0 / 5.0) * wood_thickness,
+                wood_thickness,
+                true,
+                5);
+        }
+    }
+
+    color("yellow") {
+        translate([0, (8.0/5.0)*wood_thickness, tower_height / 2 + (9.0/5.0)*wood_thickness]) {
+            chicane(
+                wood_thickness + (3.0 / 4.0) * (tower_depth - (8.0 / 5.0) * wood_thickness) / 2.0,
+                tower_width,
+                (tower_depth - (8.0 / 5.0) * wood_thickness) / 2.0,
+                wood_thickness,
+                false,
+                3);
         }
     }
 }
