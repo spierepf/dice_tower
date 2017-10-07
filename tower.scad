@@ -4,6 +4,27 @@ use <list.scad>;
 use <finger_joint.scad>;
 use <chicane.scad>;
 
+module chicanes(tower_height, tower_width, tower_depth, wood_thickness) {
+    translate([0, 0, (9.0/5.0)*wood_thickness]) {
+        chicane(
+            wood_thickness + (3.0 / 4.0) * (tower_depth - (8.0 / 5.0) * wood_thickness),
+            tower_width,
+            tower_depth - (8.0 / 5.0) * wood_thickness,
+            wood_thickness,
+            true,
+            5);
+    }
+
+    translate([0, (8.0/5.0)*wood_thickness, tower_height / 2 + (9.0/5.0)*wood_thickness]) {
+        chicane(
+            wood_thickness + (3.0 / 4.0) * (tower_depth - (8.0 / 5.0) * wood_thickness) / 2.0,
+            tower_width,
+            (tower_depth - (8.0 / 5.0) * wood_thickness) / 2.0,
+            wood_thickness,
+            false,
+            3);
+    }
+}
 module tower(tower_height, tower_width, tower_depth, wood_thickness) {
     tower_points = [
         [0,             0,                                          0],                 // 0  bottom front left
@@ -71,26 +92,6 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
     }
 
     color("yellow") {
-        translate([0, 0, (9.0/5.0)*wood_thickness]) {
-            chicane(
-                wood_thickness + (3.0 / 4.0) * (tower_depth - (8.0 / 5.0) * wood_thickness),
-                tower_width,
-                tower_depth - (8.0 / 5.0) * wood_thickness,
-                wood_thickness,
-                true,
-                5);
-        }
-    }
-
-    color("yellow") {
-        translate([0, (8.0/5.0)*wood_thickness, tower_height / 2 + (9.0/5.0)*wood_thickness]) {
-            chicane(
-                wood_thickness + (3.0 / 4.0) * (tower_depth - (8.0 / 5.0) * wood_thickness) / 2.0,
-                tower_width,
-                (tower_depth - (8.0 / 5.0) * wood_thickness) / 2.0,
-                wood_thickness,
-                false,
-                3);
-        }
+        chicanes(tower_height, tower_width, tower_depth, wood_thickness);
     }
 }
