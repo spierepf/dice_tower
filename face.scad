@@ -15,6 +15,7 @@ function convolve(n) =
 module face(points, vector) {
     polyhedron(
         concat(points, extrude(points, vector)),
-        convolve(len(points))
+        convolve(len(points)),
+        2
     );
 }
