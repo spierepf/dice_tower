@@ -47,15 +47,21 @@ function finger_joint_ends_out(ends, upward, wood_thickness, count = 3) =
         ]
     );
 
-function shorten_lead_end(ends, upward, wood_thickness) = [
-    ends[0] + wood_thickness * forward(ends[0], ends[1]),
-    ends[1]
-];
+function shorten_lead_end(ends, upward, wood_thickness) =
+    let(
+        count = len(ends)
+    )
+    [for(i = [0 : 1 : count-1])
+        i == 0 ? ends[i] + wood_thickness * forward(ends[0], ends[1]) : ends[i]
+    ];
 
-function shorten_tail_end(ends, upward, wood_thickness) = [
-    ends[0],
-    ends[1] - wood_thickness * forward(ends[0], ends[1])
-];
+function shorten_tail_end(ends, upward, wood_thickness) =
+    let(
+        count = len(ends)
+    )
+    [for(i = [0 : 1 : count-1])
+        i == count-1 ? ends[i] - wood_thickness * forward(ends[0], ends[1]) : ends[i]
+    ];
 
 function shorten_both_ends(ends, upward, wood_thickness) =
     shorten_lead_end(shorten_tail_end(ends, upward, wood_thickness), upward, wood_thickness);
