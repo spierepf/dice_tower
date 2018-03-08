@@ -79,7 +79,7 @@ module tower(tower_height, tower_width, tower_depth, wood_thickness) {
     // back
     color("green") {
         face(edge_concat([
-            finger_joint_ends_in(select(tower_points, [3, 2]), -Y, wood_thickness, 7),
+            shorten_both_ends(finger_joint_ends_in(select(tower_points, [3, 2]), -Y, wood_thickness, 7), -Y, wood_thickness),
             finger_joint_ends_in(shorten_lead_end(select(tower_points, [2, 8]), -Y, wood_thickness), -Y, wood_thickness, 11),
             shorten_both_ends(select(tower_points, [8, 9]), -Y, wood_thickness),
             finger_joint_ends_in(shorten_tail_end(select(tower_points, [9, 3]), -Y, wood_thickness), -Y, wood_thickness, 11)

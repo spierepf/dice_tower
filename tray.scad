@@ -32,7 +32,7 @@ module tray(tray_height, tray_width, tray_depth, wood_thickness) {
     // front
     color("green") {
         face(edge_concat([
-            finger_joint_ends_in(select(tray_points, [1, 0]), Y, wood_thickness, 7),
+            shorten_both_ends(finger_joint_ends_in(select(tray_points, [1, 0]), Y, wood_thickness, 7), Y, wood_thickness),
             finger_joint_ends_in(shorten_lead_end(select(tray_points, [0, 4]), Y, wood_thickness), Y, wood_thickness),
             shorten_both_ends(select(tray_points, [4, 5]), Y, wood_thickness),
             finger_joint_ends_in(shorten_tail_end(select(tray_points, [5, 1]), Y, wood_thickness), Y, wood_thickness),
@@ -54,7 +54,7 @@ module tray(tray_height, tray_width, tray_depth, wood_thickness) {
     // back
     color("green") {
         face(edge_concat([
-            finger_joint_ends_in(select(tray_points, [3, 2]), -Y, wood_thickness, 7),
+            shorten_both_ends(finger_joint_ends_in(select(tray_points, [3, 2]), -Y, wood_thickness, 7), -Y, wood_thickness),
             finger_joint_ends_in(shorten_lead_end(select(tray_points, [2, 8]), -Y, wood_thickness), -Y, wood_thickness, 5),
             shorten_both_ends(select(tray_points, [8, 9]), -Y, wood_thickness),
             finger_joint_ends_in(shorten_tail_end(select(tray_points, [9, 3]), -Y, wood_thickness), -Y, wood_thickness, 5)
